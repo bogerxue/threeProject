@@ -1,0 +1,23 @@
+#数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.11.249/threethree?serverTimezone=Asia/Shanghai&characterEncoding=utf8
+    username: root
+    password: root
+
+#查看日志
+logging:
+  level:
+    com:
+      shangma: debug
+  file:
+    path: D:\\boot
+    max-size: 100MB
+
+mybatis:
+  #别名标签
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.shangma.entity

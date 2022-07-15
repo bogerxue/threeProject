@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--如果使用mapper代理的方式 那么namespace的内容必须是对应的mapper接口的完整路径-->
+<mapper namespace="com.shangma.mapper.UserMapper">
+
+    <!--    SELECT u.*,r.role_name FROM a_user u,a_role r where	u.user_role=r.id;-->
+    <resultMap id="userAndRole" type="com.shangma.entity.User">
+        <id column="id" property="id"></id>
+        <result column="userLoginName" property="userLoginName"></result>
+        <result column="userName" property="userame"></result>
+        <result column="userPassword" property="userPassword"></result>
+        <result column="userDepartment" property="userDepartment"></result>
+        <result column="userSex" property="userSex"></result>
+        <result column="userStatus" property="userStatus"></result>
+        <result column="userJob" property="userJob"></result>
+        <result column="userPhone" property="userPhone"></result>
+        <result column="userIp" property="userIp"></result>
+        <result column="userRole" property="userRole"></result>
+        <result column="descOne" property="descOne"></result>
+        <result column="descTwo" property="descTwo"></result>
+        <result column="userStatus" property="userStatus"></result>
+        <result column="descThree" property="descThree"></result>
+        <result column="descFore" property="descFore"></result>
+        <result column="descFive" property="descFive"></result>
+        <result column="createTime" property="createTime"></result>
+        <result column="updateUser" property="updateUser"></result>
+        <result column="loginTime" property="loginTime"></result>
+        <association property="role" javaType="com.shangma.entity.Role">
+            <id column="id" property="id"></id>
+            <result column="roleCode" property="roleCode"></result>
+            <result column="roleName" property="roleName"></result>
+            <result column="roleDesc" property="roleDesc"></result>
+            <result column="roleStatue" property="roleStatue"></result>
+            <result column="rolePart" property="rolePart"></result>
+        </association>
+    </resultMap>
+<!--    u.id,u.user_login_name,u.user_name,u.user_department,u.user_sex,u.user_status,
+        u.user_job,u.user_phone,u.user_email,u.user_ip,r.role_name-->
+    <select id="findAllUserAndRole" resultType="userAndRole">
+        select *
+    from a_user u,a_role r where u.user_role=r.id
+    </select>
+
+</mapper>
