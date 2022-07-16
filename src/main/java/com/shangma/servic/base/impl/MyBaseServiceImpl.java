@@ -5,6 +5,7 @@ import com.shangma.mapper.base.MyBaseMapper;
 import com.shangma.servic.base.MyBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class MyBaseServiceImpl<T> implements MyBaseService<T> {
 
-    @Autowired
+    @Autowired(required = false)
     private MyBaseMapper<T> myBaseMapper;
 
     @Override
