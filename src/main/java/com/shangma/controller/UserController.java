@@ -23,17 +23,19 @@ public class UserController {
     @GetMapping("findAll")
     public ResultCode<User> findAll(){
         List<User> userList = userService.findAll();
+        for (User user:userList) {
+            System.out.println(user);
+        }
         ResultCode resultCode =new ResultCode();
         if (userList.isEmpty()){
 
+            resultCode.setStatusCode(StatusCode.ERROR);
+        }else {
             resultCode.setData(userList);
             resultCode.setStatusCode(StatusCode.OK);
-            return resultCode;
-        }else {
-            resultCode.setStatusCode(StatusCode.ERROR);
-            return resultCode;
         }
-        }
+        return resultCode;
+    }
 
 
 }

@@ -6,7 +6,8 @@ import lombok.Data;
 
 
 /**
- * @author JAVASM
+ * @author BOGEY
+ * 2022/7/14  21:19
  */
 @Data
 @TableName("a_permission")
