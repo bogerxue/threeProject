@@ -6,3 +6,10 @@ spring:
     password: root
 server:
   port: 8080
+logging:
+  level:
+    root: warn
+    com:
+     shangma: debug
+  file:
+    path: F://log
