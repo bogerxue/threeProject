@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.shangma.entity.base.MyBaseEntity;
 import lombok.Data;
 
-import java.io.Serializable;
 
 /**
  * @author JAVASM
@@ -23,5 +22,6 @@ public class Permission extends MyBaseEntity {
     private long permissionLevel;
     private long parentId;
     private String permissionUrl;
+
 
 }

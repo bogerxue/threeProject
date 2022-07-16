@@ -19,17 +19,22 @@ public class ResultCode<T> {
      * 响应信息
      */
     private String message;
+
+    private StatusCode statusCode;
     /**
      * 响应数据
      */
     private T data;
 
+    public ResultCode(){
+    }
+
 
     public ResultCode(StatusCode statusCode, T t) {
-        this.status = statusCode.getStatus();
-        this.message = statusCode.getMessage();
+        this.statusCode=statusCode;
         this.data = t;
     }
+
 
     private static <T> ResultCode<T> getInstance(StatusCode statusCode, T t) {
         return new ResultCode<T>(statusCode, t);
