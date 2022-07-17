@@ -18,7 +18,7 @@ public class MyBaseServiceImpl<T> implements MyBaseService<T> {
     private MyBaseMapper<T> myBaseMapper;
 
     @Override
-    public T findObjectById(Integer id) {
+    public T findObjectById(Long id) {
         return myBaseMapper.selectById(id);
     }
 
@@ -43,12 +43,12 @@ public class MyBaseServiceImpl<T> implements MyBaseService<T> {
     }
 
     @Override
-    public Integer deleteObjectById(Integer id) {
+    public Integer deleteObjectById(Long id) {
         return myBaseMapper.deleteById(id);
     }
 
     @Override
-    public Integer batchDeleteObject(List<Integer> ids) {
+    public Integer batchDeleteObject(List<Long> ids) {
         return myBaseMapper.deleteBatchIds(ids);
     }
 }

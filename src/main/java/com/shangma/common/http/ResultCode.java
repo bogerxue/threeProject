@@ -29,22 +29,28 @@ public class ResultCode<T> {
     public ResultCode(){
     }
 
+    public ResultCode(StatusCode statusCode) {
+        this.statusCode=statusCode;
+    }
 
     public ResultCode(StatusCode statusCode, T t) {
         this.statusCode=statusCode;
         this.data = t;
     }
 
-
-    private static <T> ResultCode<T> getInstance(StatusCode statusCode, T t) {
+    public static ResultCode getInstance(StatusCode statusCode) {
+        return new ResultCode(statusCode);
+    }
+    public static <T> ResultCode<T> getInstance(StatusCode statusCode, T t) {
         return new ResultCode<T>(statusCode, t);
     }
+
 
     /**
      * 请求成功返回
      * @return 状态信息
      */
-    private static <T> ResultCode<T> success() {
+    public static <T> ResultCode<T> success() {
         return getInstance(StatusCode.OK, null);
     }
 
@@ -53,7 +59,7 @@ public class ResultCode<T> {
      * @param t 数据
      * @return 状态信息和数据
      */
-    private static <T> ResultCode<T> success(T t) {
+    public static <T> ResultCode<T> success(T t) {
         return getInstance(StatusCode.OK, t);
     }
 
@@ -61,7 +67,7 @@ public class ResultCode<T> {
      * 请求失败返回
      * @return 状态信息
      */
-    private static <T> ResultCode<T> error() {
+    public static <T> ResultCode<T> error() {
         return getInstance(StatusCode.ERROR, null);
     }
     /**
@@ -69,7 +75,7 @@ public class ResultCode<T> {
      * @param t 数据
      * @return 状态信息和数据
      */
-    private static <T> ResultCode<T> error(T t) {
+    public static <T> ResultCode<T> error(T t) {
         return getInstance(StatusCode.ERROR, t);
     }
 

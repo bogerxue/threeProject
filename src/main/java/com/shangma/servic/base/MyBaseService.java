@@ -15,7 +15,7 @@ public interface MyBaseService<T> {
      * @param id 实例id
      * @return 实例
      */
-    T findObjectById(Integer id);
+    T findObjectById(Long id);
 
     /**
      * 根据条件查询
@@ -49,13 +49,13 @@ public interface MyBaseService<T> {
      * @param id 实例id
      * @return 状态码
      */
-    Integer deleteObjectById(Integer id);
+    Integer deleteObjectById(Long id);
 
     /**
      * 根据id批量删除
      * @param ids 实例id集合
      * @return 状态码
      */
-    Integer batchDeleteObject(List<Integer> ids);
+    Integer batchDeleteObject(List<Long> ids);
 
 }

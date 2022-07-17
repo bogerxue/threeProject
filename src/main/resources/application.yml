@@ -13,3 +13,8 @@ logging:
      shangma: debug
   file:
     path: F://log
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.shangma.entity

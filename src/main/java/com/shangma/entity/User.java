@@ -1,5 +1,6 @@
 package com.shangma.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.shangma.entity.base.MyBaseEntity;
 import lombok.Data;
@@ -17,15 +18,6 @@ public class User extends MyBaseEntity {
     private String userName;
     private String userEmail;
     private String userPassword;
-    private String userJob;
+    private Job job;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userJob='" + userJob + '\'' +
-                '}';
-    }
 }

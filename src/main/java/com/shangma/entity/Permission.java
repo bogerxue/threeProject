@@ -5,6 +5,7 @@ import com.shangma.entity.base.MyBaseEntity;
 import lombok.Data;
 
 
+
 /**
  * @author BOGEY
  * 2022/7/14  21:19
@@ -20,7 +21,6 @@ public class Permission extends MyBaseEntity {
     private static final long serialVersionUID = 12345678901L;
 
     private String permissionName;
-    private long permissionLevel;
     private long parentId;
     private String permissionUrl;
 
