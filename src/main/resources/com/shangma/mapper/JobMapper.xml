@@ -18,7 +18,11 @@
     </resultMap>
 
     <select id="selectJobAndPermission" resultMap="jobAndPermission">
-        select  j.id, j.job_name, j.job_desc, p.pid, p.permission_name, p.permission_url, p.parent_id
-        from a_job j,a_permission p, a_job_permission jp where j.id=jp.job_id And jp.permission_id=p.pid
+        select j.id, j.job_name, j.job_desc, p.id pid, p.permission_name, p.permission_url, p.parent_id
+        from a_job j,
+             a_permission p,
+             a_job_permission jp
+        where j.id = jp.job_id
+          And jp.permission_id = p.id
     </select>
 </mapper>

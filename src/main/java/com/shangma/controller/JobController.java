@@ -32,5 +32,7 @@ public class JobController extends MyBaseController {
     public ResultCode<List<Map>> selectJobAndPermission(){
         return ResultCode.success(jobService.selectJobAndPermission());
     }
+    //职务增删改查
+    //todo
 
 }

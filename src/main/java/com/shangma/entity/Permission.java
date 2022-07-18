@@ -24,7 +24,7 @@ public class Permission{
     /**
      * mybatisplus 主键自动增加
      */
-    @TableId(type = IdType.AUTO,value = "pid")
+    @TableId(type = IdType.AUTO)
     private Long id;
     private String permissionName;
     private long parentId;

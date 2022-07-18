@@ -9,7 +9,6 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -32,7 +31,7 @@ public class Job{
     private String jobDesc;
     private Long jobParentId;
     /**
-     * 字段是否为数据库字段
+     *字段是否为数据库字段
      */
     @TableField(exist = false)
     private List<Permission> permissionList = new ArrayList<>();
