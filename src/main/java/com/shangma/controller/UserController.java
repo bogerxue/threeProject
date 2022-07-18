@@ -5,11 +5,13 @@ import com.shangma.common.http.ResultCode;
 import com.shangma.common.http.StatusCode;
 import com.shangma.controller.base.MyBaseController;
 import com.shangma.entity.User;
+import com.shangma.entity.UserAndJob;
 import com.shangma.servic.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wenbo
@@ -25,6 +27,15 @@ public class UserController extends MyBaseController {
     @GetMapping
     public ResultCode<List<User>> findAll(){
         return ResultCode.success(userService.findAll());
+    }
+
+    @GetMapping("andJob/{id}")
+    public ResultCode<UserAndJob> findUserAndJob(@PathVariable Long id){
+        return ResultCode.success(userService.findUserAndJobById(id));
+    }
+    @GetMapping("andJob")
+    public ResultCode<List<Map>> findUserAndJob(){
+        return ResultCode.success(userService.findUserAndJob());
     }
 
     @GetMapping("{id}")

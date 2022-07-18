@@ -1,6 +1,8 @@
 package com.shangma.entity;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.shangma.entity.base.MyBaseEntity;
 import lombok.Data;
@@ -14,14 +16,16 @@ import java.util.List;
 
 @Data
 @TableName("a_job")
-public class Job extends MyBaseEntity {
+public class Job{
 
     private static final long serialVersionUID = 12345678902L;
 
-
+    /**
+     * mybatisplus 主键自动增加
+     */
+    @TableId(type = IdType.AUTO)
+    private Long id;
     private String jobName;
     private String jobDesc;
-    private Integer jobParentId;
-    private List<Permission> permissions;
-
+    private Long jobParentId;
 }

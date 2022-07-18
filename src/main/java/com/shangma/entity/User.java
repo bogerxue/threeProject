@@ -18,6 +18,6 @@ public class User extends MyBaseEntity {
     private String userName;
     private String userEmail;
     private String userPassword;
-    private Job job;
+    private long userJob;
 
 }

@@ -4,16 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shangma.mapper.UserMapper">
 
-    <resultMap id="UserAndJob" type="User">
-        <result column="id" property="id"/>
-        <result column="userEmail" property="userEmail"/>
-
-        <result column="user_name" property="username"/>
-        <association property="job" javaType="" column="job">
-            <result column="jobName" property="jobName"/>
-        </association>
-    </resultMap>
-    <select id="getUserAndJob" resultMap="User">
-        select *from user
+    <select id="findUser" parameterType="User">
+        select *
+        from a_user
     </select>
+
+    <select id="findUserAndJob" resultType="java.util.Map">
+        SELECT *
+        FROM a_user U
+                 JOIN A_JOB J
+                      ON U.USER_JOB = J.ID
+    </select>
+
+    <select id="findUserAndJobById" resultType="UserAndJob">
+        SELECT U.ID            id,
+               U.USER_NAME     userName,
+               U.USER_Email    userEmail,
+               U.USER_Password userPassword,
+               J.JOB_NAME      jobName,
+               J.JOB_DESC      jobDesc,
+               J.JOB_PARENT_ID jobParentId
+        FROM a_user U
+                 JOIN A_JOB J
+                      ON U.USER_JOB = J.ID
+                          AND U.ID = #{id}
+    </select>
+
+
 </mapper>
