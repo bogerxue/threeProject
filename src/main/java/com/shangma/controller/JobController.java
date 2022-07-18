@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wenbo
@@ -26,4 +27,10 @@ public class JobController extends MyBaseController {
     public ResultCode<List<Job>> findAll(){
         return ResultCode.success(jobService.findAll());
     }
+
+    @GetMapping("andPermission")
+    public ResultCode<List<Map>> selectJobAndPermission(){
+        return ResultCode.success(jobService.selectJobAndPermission());
+    }
+
 }

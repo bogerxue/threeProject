@@ -2,12 +2,15 @@ package com.shangma.entity;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.shangma.entity.base.MyBaseEntity;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 
 /**
  * @author BOGEY
@@ -28,4 +31,9 @@ public class Job{
     private String jobName;
     private String jobDesc;
     private Long jobParentId;
+    /**
+     * 字段是否为数据库字段
+     */
+    @TableField(exist = false)
+    private List<Permission> permissionList = new ArrayList<>();
 }

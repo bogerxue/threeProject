@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.JobMapper">
+
+
+    <resultMap id="jobAndPermission" type="Job">
+        <id column="ID" property="id"/>
+        <result column="JOB_NAME" property="jobName"/>
+        <result column="JOB_DESC" property="jobDesc"/>
+        <collection property="permissionList" javaType="Permission">
+            <result column="PID" property="id"/>
+            <result column="PERMISSION_NAME" property="permissionName"/>
+            <result column="PERMISSION_URL" property="permissionUrl"/>
+            <result column="PARENT_ID" property="parentId"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectJobAndPermission" resultMap="jobAndPermission">
+        select  j.id, j.job_name, j.job_desc, p.pid, p.permission_name, p.permission_url, p.parent_id
+        from a_job j,a_permission p, a_job_permission jp where j.id=jp.job_id And jp.permission_id=p.pid
+    </select>
+</mapper>
