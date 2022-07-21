@@ -3,7 +3,6 @@ package com.shangma.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.shangma.entity.base.MyBaseEntity;
 import lombok.Data;
 
 
@@ -28,6 +27,7 @@ public class Permission{
     private Long id;
     private String permissionName;
     private long parentId;
+    private long permissionLevel;
     private String permissionUrl;
 
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shangma.mapper.RoleMapper">
+
+
+    <resultMap id="roleAndPermission" type="Role">
+        <id column="ID" property="id"/>
+        <result column="Role_NAME" property="roleName"/>
+        <result column="Role_DESC" property="roleDesc"/>
+        <collection property="permissionList" javaType="Permission">
+            <result column="PID" property="id"/>
+            <result column="PERMISSION_NAME" property="permissionName"/>
+            <result column="PERMISSION_URL" property="permissionUrl"/>
+            <result column="PARENT_ID" property="parentId"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectPermissionAndRole" resultMap="roleAndPermission">
+        select r.id, r.role_name, r.role_desc, p.id pid, p.permission_name, p.permission_url, p.parent_id
+        from a_role r,
+             a_permission p,
+             a_permission_role pr
+        where r.id = pr.role_id
+          And pr.permission_id = p.id
+    </select>
+</mapper>

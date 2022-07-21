@@ -4,31 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shangma.mapper.UserMapper">
 
-    <select id="findUser" parameterType="User">
-        select *
-        from a_user
-    </select>
 
-    <select id="findUserAndJob" resultType="java.util.Map">
-        SELECT *
-        FROM a_user U
-                 JOIN A_JOB J
-                      ON U.USER_JOB = J.ID
-    </select>
+    <resultMap id="UserAll" type="User">
+        <id column="ID" property="id"/>
+        <result column="USER_LOGIN_NAME" property="userLoginName"/>
+        <result column="USER_NAME" property="userName"/>
+        <result column="USER_PASSWORD" property="userPassword"/>
+        <association property="role" javaType="Role">
+            <id column="RID" property="id"/>
+            <result column="Role_NAME" property="roleName"/>
+            <result column="Role_DESC" property="roleDesc"/>
+            <collection property="permissionList" javaType="Permission">
+                <result column="PID" property="id"/>
+                <result column="PERMISSION_NAME" property="permissionName"/>
+                <result column="PERMISSION_URL" property="permissionUrl"/>
+                <result column="PARENT_ID" property="parentId"/>
+            </collection>
+        </association>
 
-    <select id="findUserAndJobById" resultType="UserAndJob">
-        SELECT U.ID            id,
-               U.USER_NAME     userName,
-               U.USER_Email    userEmail,
-               U.USER_Password userPassword,
-               J.JOB_NAME      jobName,
-               J.JOB_DESC      jobDesc,
-               J.JOB_PARENT_ID jobParentId
-        FROM a_user U
-                 JOIN A_JOB J
-                      ON U.USER_JOB = J.ID
-                          AND U.ID = #{id}
-    </select>
+    </resultMap>
 
+    <select id="findUserAndAll" resultMap="UserAll">
+        SELECT u.id,u.user_login_name,u.user_name,u.user_password ,r.id rid, r.role_name, r.role_desc, p.id pid, p.permission_name, p.permission_url, p.parent_id
+        FROM a_user u
+        LEFT JOIN a_user_role ur on u.id = ur.user_id
+        LEFT JOIN a_role r on ur.role_id = r.id
+        LEFT JOIN a_permission_role pr on r.id = pr.role_id
+        LEFT JOIN a_permission p on pr.permission_id = p.id
+    </select>
 
 </mapper>

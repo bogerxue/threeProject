@@ -1,7 +1,7 @@
 package com.shangma.controller.base;
 
-import com.shangma.common.http.ResultCode;
-import com.shangma.common.http.StatusCode;
+import com.shangma.common.http.AxiosResult;
+import com.shangma.common.http.AxiosStatus;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,16 +11,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBaseController {
 
-    public ResultCode toResult(int row) {
-        return row > 0 ? ResultCode.success() : ResultCode.error();
+    public AxiosResult toResult(int row) {
+        return row > 0 ? AxiosResult.getInstance(AxiosStatus.OK) : AxiosResult.getInstance(AxiosStatus.ERROR);
     }
 
-    public ResultCode toResult(int row, StatusCode statusCode) {
-        return row > 0 ? ResultCode.success() : ResultCode.getInstance(statusCode);
+    public AxiosResult toResult(int row, AxiosStatus axiosStatus) {
+        return row > 0 ? AxiosResult.getInstance(AxiosStatus.OK) : AxiosResult.getInstance(axiosStatus);
     }
 
-    public ResultCode toResult(int row, StatusCode success, StatusCode error) {
-        return row > 0 ? ResultCode.getInstance(success) : ResultCode.getInstance(error);
+    public AxiosResult toResult(int row, AxiosStatus success, AxiosStatus error) {
+        return row > 0 ? AxiosResult.getInstance(success) : AxiosResult.getInstance(error);
     }
 
 

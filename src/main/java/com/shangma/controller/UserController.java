@@ -1,70 +1,73 @@
 package com.shangma.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.shangma.common.http.ResultCode;
-import com.shangma.common.http.StatusCode;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.shangma.annotation.PrivAnno;
+import com.shangma.common.http.AxiosResult;
+import com.shangma.common.http.AxiosStatus;
+import com.shangma.common.page.PageBean;
+import com.shangma.common.page.PageParam;
 import com.shangma.controller.base.MyBaseController;
 import com.shangma.entity.User;
-import com.shangma.entity.UserAndJob;
-import com.shangma.servic.UserService;
+import com.shangma.enums.PrivEnum;
+import com.shangma.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
  * @author wenbo
  * 2022/7/16
+ * Slf4j 直接使用log快速调用
  */
+@Slf4j
 @RestController
-@RequestMapping("user")
+@RequestMapping("u")
 public class UserController extends MyBaseController {
 
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public ResultCode<List<User>> findAll(){
-        return ResultCode.success(userService.findAll());
-    }
-
-    @GetMapping("andJob/{id}")
-    public ResultCode<UserAndJob> findUserAndJob(@PathVariable Long id){
-        return ResultCode.success(userService.findUserAndJobById(id));
-    }
-    @GetMapping("andJob")
-    public ResultCode<List<Map>> findUserAndJob(){
-        return ResultCode.success(userService.findUserAndJob());
+    public AxiosResult<PageBean<User>> findAll(PageParam pageParam) {
+        Page page = PageHelper.startPage(pageParam);
+        return AxiosResult.getInstance(PageBean.initData(page.getTotal(), userService.findAll()), AxiosStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResultCode<User> findById(@PathVariable Long id){
-        return ResultCode.success(userService.findObjectById(id));
+    public AxiosResult<User> findById(@PathVariable Long id) {
+        return AxiosResult.getInstance(userService.findObjectById(id), AxiosStatus.OK);
     }
 
-    @GetMapping("{userName}")
-    public ResultCode<List<User>> findByTerm(@RequestBody String userName ){
-        QueryWrapper<User> queryWrapper =new QueryWrapper<>();
-        queryWrapper.eq("userName",userName);
-        return ResultCode.success(userService.searchObject(queryWrapper));
+    @GetMapping("userAll")
+    @PrivAnno(PrivEnum.ADMIN)
+    public AxiosResult<PageBean<Map>> userAll(PageParam pageParam) {
+        Page page = PageHelper.startPage(pageParam);
+        return AxiosResult.getInstance(
+                PageBean.initData(
+                        page.getTotal(),
+                        userService.findUserAndAll()),
+                AxiosStatus.OK);
     }
 
     @PostMapping
-    public ResultCode addUser(@RequestBody User user ){
-        return toResult(userService.addObject(user),StatusCode.ADDUSER_ERROR);
+    public AxiosResult addUser(@RequestBody User user) {
+        return toResult(userService.addObject(user),
+                AxiosStatus.ADDUSER_ERROR);
     }
 
     @PutMapping
-    public ResultCode editUser(@RequestBody User user){
-        return toResult(userService.updateObject(user));
+    public AxiosResult editUser(@RequestBody User user) {
+        return toResult(userService.updateObject(user),
+                AxiosStatus.UPDATE_ERROR);
     }
 
     @DeleteMapping("{id}")
-    public ResultCode deleteUser(@PathVariable Long id){
-        return toResult(userService.deleteObjectById(id));
+    public AxiosResult deleteUser(@PathVariable Long id) {
+        return toResult(userService.deleteObjectById(id),
+                AxiosStatus.DELETE_ERROR);
     }
-
-
 
 }
